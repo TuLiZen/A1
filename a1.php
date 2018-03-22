@@ -9,5 +9,5 @@ if (!isset($_GET['aa'])
 	$x=$_GET['aa'];
 	$y=$_GET['bb'];
 	$z=$x+$y;
-	
 	echo $z;
+	echo "^_^";
