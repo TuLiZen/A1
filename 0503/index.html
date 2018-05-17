@@ -20,22 +20,30 @@ function hideNode(id){
 
 //把表單的資料，送到伺服器上新增儲存
 function add2Server(){
-	//隨便寫些東西到 console 試試看
+
 	//建立一個要發送到伺服器的資料物件{ } JSON
 	var data={
 		prod: document.getElementById("prod").value,
 		priqe: document.getElementById("price").value
 	};
 	
-	console.log("data");
+	//console.log(data);
 	
 	//AJAX請求
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST","add.php");	//發送對象 add.php
 	xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 	xhr.onreadystatechange=function(){
-		if(this.readystate == 4 && this.status == 200 ) { //正確回傳
-		console.log(this.responseText);//先不做任何處理，只是印出回傳的訊息
+		if(this.readyState == 4){//回傳結束了
+			if(this.status == 201 ) { //正確
+			console.log(this.responseText);//不做任何處理
+			//insert2List(????); //新增到list
+			hideNode("edit_form");
+			showNode("show_add_btn");
+			}else{//錯誤
+				console.log(this.responseText);//先不做任何處理
+				alert('新增失敗');
+				}
 		}
 	};
 	xhr.send(JSON.stringify(data)); //stringift書上沒有教學 要注意要打到i i很常被漏掉
@@ -62,7 +70,7 @@ function add2Server(){
 	<script type="text/javascript">
 (function() {
 	//預設隱藏編輯表單
-	hideNode("edit_form");
+	//hideNode("edit_form");
 	
 	var x;
 	//設定點擊「新增」按鈕時的動作(顯示新增的編輯表單)
