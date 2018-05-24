@@ -1,38 +1,57 @@
-�إ�...
-* ��Ʈw test0329
-* ��ƪ�table moneybook
-* ���
-	1. m_id    Primary key
-	2. name    200�H�U���r��
-	3. cost    ���
-* �i�H�ާ@�o�Ӹ�Ʈw���ϥΪ� mememe / 123456
-	1. ���� D:\xampp\mysql\bin\mysql -uroot
-	2. �ϥ� http://localhost/phpmyadmin/
-	3. �ϥ� adminer http://localhost/adminer.php
-   
+# 使用方式
 
-�R�O���ܦr�� D:\xampp\mysql\bin\mysql -uroot
+速成版
 
-````
-CREATE DATABASE test0329 DEFAULT CHARACTER SET 'utf8' DEFAULT COLLATE 'utf8_general_ci';
+## 第零步
 
-CREATE USER 'mememe'@'localhost' IDENTIFIED BY '123456';
+到github開一個帳號, 開一個倉庫，接下一段
 
-GRANT ALL PRIVILEGES ON test0329.* TO 'mememe'@'localhost';
+## 教室的電腦（每個禮拜來上課時），以及未設定的新電腦
 
-FLUSH PRIVILEGES;
+```
+git config --global user.name "自己的帳號名稱"
+git config --global user.email "自己的Email"
+```
 
-EXIT;
-````
+切換到工作資料夾, 順便清空原內容，然後複製倉庫到本地端
 
-�R�O���ܦr�� D:\xampp\mysql\bin\mysql -umememe -p
+```
+git clone 遠端倉庫的路徑 [複製到資料夾]
+```
 
-````
-USE test0329;
+例如複製此倉庫到目前所在資料夾
 
-CREATE TABLE moneybook (
-  m_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(200),
-  cost INT
-) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-````
+```
+git clone https:github.com/FilitovDemo/test2018.git .
+```
+
+工作中，每到一個階段，可記錄一個版本，隨時可供追蹤或回溯：
+
+```
+git add 檔案們
+git commit -m "做了甚麼"
+```
+
+工作完成後，將階段性成果推送到遠端github倉庫：
+
+```
+git push
+```
+
+若有帳號密碼的提示，請輸入 github 的帳號密碼
+
+## 自己的隨身碟，或自己的電腦，無需每次都設定的
+
+### 第一次設定同上
+
+### 第二次以後
+
+若是沒在其他電腦工作過，不用做其他操作。
+
+若是曾在其他電腦工作，並且在他處將倉庫推送到遠端github倉庫中，拉回新的版本：
+
+```
+git pull
+```
+
+### 其他同上
