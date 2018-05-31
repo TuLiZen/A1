@@ -15,7 +15,7 @@
 always_populate_raw_post_data = -1
 ```
 
-可以關掉 $HTTP_RAW_POST_DATA 停用訊息，記得要關掉重開php或網頁伺服器。
+可以關掉 $HTTP_RAW_POST_DATA 停用訊息，***記得要關掉重開php或網頁伺服器***。
 
 ## 建立資料表與使用者 (同0329)
 

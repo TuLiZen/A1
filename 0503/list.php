@@ -1,7 +1,8 @@
 <?php
-//輸入=======================================================================
+//輸入=======================================================
 
-//資料庫操作===================================================================
+
+//資料庫操作===================================================
 try {
 	$db = new PDO('mysql:host=localhost;dbname=test0329;charset=utf8'
 		,'mememe','123456', array( 
@@ -9,28 +10,27 @@ try {
 			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 		) );
 }catch(PDOException $err) {
-	echo "ERROR:";
-	echo $err->getMessage();  //真實世界不這樣做
-	echo '<a href="list.php">回到列表</a>';
+	http_response_code(500);
+	echo 'failed';
+	//echo $err->getMessage(); //測試的時候用
 	exit;
 }
 
+//查詢
+$stmt = $db->prepare('select * from moneybook');
+$stmt->execute();
 
-//查詢=======================================================================
-$stmt = $db->prepare('insert into moneybook (name,cost) values (?,?)');
-$stmt->execute([$_POST['prod'],$_POST['price']]);
+//輸出=======================================================
+$data = array();
 
-//輸出=======================================================================
-$data=array();
-
-while($row=$stmt->fetch()){
-	$data[]=(object)[
-		'prod'=>$row['name']
-		'price'=>$row['coat']
-		'id'=>$row['m_id']
-	];
+while($row = $stmt->fetch()){  //小心,此處的=號是把右邊的值存往左側
+	$data[] = (object)[
+			'prod' => $row['name'],
+			'price' => $row['cost'],
+			'id' => $row['m_id']
+		];
 }
 
 http_response_code(200);
-header("Content-Cype: application/json;charset=UTF-8");
-echo json_encode($data);
+header("Content-Type: application/json;charset=UTF-8");
+echo json_encode($data);              //把查詢資料回傳給用戶端
